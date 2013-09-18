@@ -25,6 +25,7 @@ public class WelcomeController {
 
 	@Autowired
 	private DogAnimalManager dogAnimalManager;
+	private DogBean dogBean = new DogBean();
 
 	/**
 	 * Shows welcome page.
@@ -34,7 +35,7 @@ public class WelcomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "text/html")
 	public String welcome(Model model) {
-		model.addAttribute("dog", new DogBean());
+		model.addAttribute("dog", dogBean);
 		return WELCOME;
 	}
 
@@ -61,7 +62,7 @@ public class WelcomeController {
 		dogAnimalManager.store(dog);
 
 		model.addAttribute("dogs", dogAnimalManager.getDogs());
-		model.addAttribute("dog", new DogBean());
+		model.addAttribute("dog", dogBean);
 
 		return WELCOME;
 	}
