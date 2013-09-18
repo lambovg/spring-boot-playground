@@ -1,9 +1,9 @@
 package org.springframework.boot.sample.jsp.animal;
 
 /**
- * By default this is mutable class
+ * By default this is mutable class.
  * 
- * @author g
+ * @author georgilambov
  * 
  */
 public class Animal {

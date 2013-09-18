@@ -1,7 +1,7 @@
 package org.springframework.boot.sample.jsp.animal;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * 
@@ -16,6 +16,7 @@ public class DogTest {
 		Dog chaochao = new Dog("a", 1);
 		chaochao.setAge(12);
 
+		Assert.assertEquals(chaochao.getAge(), 1);
 		Assert.assertEquals(chaochao, dog);
 		Assert.assertEquals(chaochao.hashCode(), dog.hashCode());
 
@@ -24,5 +25,4 @@ public class DogTest {
 		Assert.assertEquals(s, b);
 		Assert.assertEquals(s.hashCode(), b.hashCode());
 	}
-
 }

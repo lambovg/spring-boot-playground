@@ -12,6 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * Welcome page controller
+ * 
+ * @author georgilambov
+ * 
+ */
 @Controller
 public class WelcomeController {
 
@@ -20,16 +26,32 @@ public class WelcomeController {
 	@Autowired
 	private DogAnimalManager dogAnimalManager;
 
+	/**
+	 * Shows welcome page.
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "text/html")
 	public String welcome(Model model) {
 		model.addAttribute("dog", new DogBean());
 		return WELCOME;
 	}
 
+	/**
+	 * Processes request from welcome page.
+	 * 
+	 * @param dog
+	 * @param result
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(method = RequestMethod.POST, produces = "text/html")
 	public String welcome(@Valid DogBean dog, BindingResult result,
 			Model model, HttpServletRequest request) {
 
+		// TODO validation errors are not visible in the view.
 		if (result.hasErrors()) {
 			model.addAttribute("dogs", dogAnimalManager.getDogs());
 			model.addAttribute("dog", dog);

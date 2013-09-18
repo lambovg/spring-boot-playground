@@ -1,6 +1,5 @@
 package org.springframework.boot.sample.jsp.animal;
 
-
 /**
  * Immutable Dog object that extends mutable {@link Animal}.
  * 
@@ -28,6 +27,12 @@ public final class Dog extends Animal {
 		return breed;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.springframework.boot.sample.jsp.animal.Animal#getAge()
+	 */
+	@Override
 	public int getAge() {
 		return this.age;
 	}

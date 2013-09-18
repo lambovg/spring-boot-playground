@@ -7,9 +7,9 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 
 /**
- * DTO object between view and action.
+ * DTO between view and action.
  * 
- * @author g
+ * @author georgilambov
  * 
  */
 public class DogBean {

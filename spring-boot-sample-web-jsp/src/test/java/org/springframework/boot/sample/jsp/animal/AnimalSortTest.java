@@ -1,12 +1,11 @@
 package org.springframework.boot.sample.jsp.animal;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 /**
  * 
@@ -15,39 +14,36 @@ import org.junit.Test;
  */
 public class AnimalSortTest {
 
-	@Test
-	public void animalsSortByAgeDesc() {
+	@Test(dataProvider = "dogAnimals")
+	public void animalsSortByAgeDesc(List<Dog> dogs) {
 
 		List<Animal> animals = new ArrayList<Animal>();
+		animals.addAll(dogs);
 
-		Dog cat1 = new Dog("type1", 12);
-		Dog cat2 = new Dog("type2", 13);
-		Dog cat3 = new Dog("type1", 9);
-		Dog cat4 = new Dog("type1", 10);
+		// retrieve extreme positions.
+		Dog dog2 = dogs.get(1);
+		Dog dog3 = dogs.get(2);
 
-		animals.addAll(Arrays.asList(cat1, cat2, cat3, cat4));
 		Collections.sort(animals, new AnimalSortDesc());
 
-		Assert.assertEquals(animals.get(0).getAge(), cat2.getAge());
+		Assert.assertEquals(animals.get(0).getAge(), dog2.getAge());
 		Assert.assertEquals(animals.get(animals.size() - 1).getAge(),
-				cat3.getAge());
+				dog3.getAge());
 	}
 
-	@Test
-	public void animalsSortByAgeAsc() {
+	@Test(dataProvider = "dogAnimals")
+	public void animalsSortByAgeAsc(List<Dog> dogs) {
 		List<Animal> animals = new ArrayList<Animal>();
-
-		Dog cat1 = new Dog("type1", 12);
-		Dog cat2 = new Dog("type2", 13);
-		Dog cat3 = new Dog("type1", 9);
-		Dog cat4 = new Dog("type1", 10);
-
-		animals.addAll(Arrays.asList(cat1, cat2, cat3, cat4));
+		animals.addAll(dogs);
 		Collections.sort(animals, new AnimalSortAsc());
 
-		Assert.assertEquals(animals.get(0).getAge(), cat3.getAge());
+		// retrieve extreme positions.
+		Dog dog2 = dogs.get(1);
+		Dog dog3 = dogs.get(2);
+
+		Assert.assertEquals(animals.get(0).getAge(), dog3.getAge());
 		Assert.assertEquals(animals.get(animals.size() - 1).getAge(),
-				cat2.getAge());
+				dog2.getAge());
 
 	}
 }
