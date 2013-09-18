@@ -12,6 +12,7 @@ import org.springframework.boot.sample.jsp.service.DogAnimalManager;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -25,7 +26,6 @@ public class WelcomeControllerTest {
 
 	private WelcomeController welcomeController;
 
-	@Mock
 	private DogAnimalManager dogAnimalManager;
 	@Mock
 	private DogBean dogBean;
@@ -42,6 +42,7 @@ public class WelcomeControllerTest {
 	@BeforeClass
 	public void init() {
 		welcomeController = new WelcomeController();
+		dogAnimalManager = new DogAnimalManager();
 	}
 
 	@BeforeMethod
@@ -61,9 +62,13 @@ public class WelcomeControllerTest {
 	@Test
 	public void welcomePostWithValidResult() {
 		when(result.hasErrors()).thenReturn(false);
+
+		int expectedDogs = dogAnimalManager.getDogs().size();
 		welcomeController.welcome(validDogBean, result, model, request);
+		int actualDogs = dogAnimalManager.getDogs().size();
+
 		verify(result).hasErrors();
-		verify(dogAnimalManager).store(validDogBean);
+		Assert.assertEquals(actualDogs, expectedDogs + 1);
 	}
 
 	@Test
@@ -72,5 +77,6 @@ public class WelcomeControllerTest {
 		welcomeController.welcome(dogBean, result, model, request);
 		verify(result).hasErrors();
 		verify(model).addAttribute("dog", dogBean);
+		Assert.assertEquals(dogAnimalManager.getDogs().size(), 0);
 	}
 }
